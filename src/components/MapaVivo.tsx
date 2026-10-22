@@ -48,7 +48,7 @@ export function MapaVivo() {
   const [sel, setSel] = useState<string>("calcanhar");
 
   const regioes = REGIOES.filter((r) => r.vistas.includes(vista));
-  const atual = regioes.find((r) => r.id === sel) ?? regioes[0];
+  const atual = (regioes.find((r) => r.id === sel) ?? regioes[0])!;
   const registros = DEMO[`${pe}-${atual.id}`] ?? [];
 
   const trocarVista = (v: Vista) => {

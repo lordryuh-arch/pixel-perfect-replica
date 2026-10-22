@@ -133,7 +133,7 @@ function Carrossel() {
     const id = setInterval(() => setI((x) => (x + 1) % SLIDES.length), 7000);
     return () => clearInterval(id);
   }, [paused]);
-  const s = SLIDES[i];
+  const s = SLIDES[i]!;
   return (
     <section aria-roledescription="carrossel" aria-label="Destaques" className="bg-primary py-16 text-primary-foreground"
       onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)}

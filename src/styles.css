@@ -43,6 +43,11 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
+  --color-info: var(--info);
+  --color-highlight: var(--highlight);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+  --shadow-soft: var(--shadow-soft);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
@@ -62,26 +67,31 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 1rem;
+  --background: oklch(0.982 0.01 90);
+  --foreground: oklch(0.36 0.02 235);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.36 0.02 235);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.36 0.02 235);
+  --primary: oklch(0.34 0.06 240);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.94 0.025 165);
+  --secondary-foreground: oklch(0.34 0.06 240);
+  --muted: oklch(0.93 0.004 150);
+  --muted-foreground: oklch(0.5 0.02 235);
+  --accent: oklch(0.54 0.1 168);
+  --accent-foreground: oklch(0.99 0 0);
+  --info: oklch(0.55 0.11 245);
+  --highlight: oklch(0.84 0.12 85);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.005 150);
+  --input: oklch(0.92 0.005 150);
+  --ring: oklch(0.55 0.11 245);
+  --shadow-soft: 0 20px 50px -24px color-mix(in oklab, var(--primary) 35%, transparent);
+  --font-display: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +150,9 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
   }
+  h1, h2, h3, h4 { font-family: var(--font-display); color: var(--color-primary); letter-spacing: -0.02em; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 }

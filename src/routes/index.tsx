@@ -1,12 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MapaVivo } from "@/components/MapaVivo";
 import { EbookSection, ModulesSection, PlatformSection, OfferSection } from "@/components/OfferSections";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
+import { ArrowRight, BookOpen, Check, HeartHandshake, Map, Menu, ShieldCheck, X } from "lucide-react";
+import coverImg from "@/assets/capa-guia.jpg";
+import p1 from "@/assets/publico-1.jpg";
+import p2 from "@/assets/publico-2.jpg";
+import p3 from "@/assets/publico-3.jpg";
+import p4 from "@/assets/publico-4.jpg";
 import heroImg from "@/assets/hero-familia.jpg";
-import cuidadoImg from "@/assets/cuidado-pes.jpg";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,9 +38,10 @@ function Index() {
       <Header />
       <main>
         <Hero />
-        <Carrossel />
+        <Beneficios />
         <Problema />
         <EbookSection />
+        <ParaQuem />
         <ModulesSection />
         <ComoFunciona />
         <PlatformSection />
@@ -45,12 +49,15 @@ function Index() {
           <SectionHead kicker="Mapa Vivo · Demonstração" title="Cada região do pé, com sua própria história." text="Um exemplo de como as observações podem ficar organizadas. Os dados são fictícios e a área de acompanhamento ainda não está disponível." />
           <MapaVivo />
         </section>
-        <Familia />
         <OfferSection />
         <Faq />
         <Cta />
       </main>
       <Footer />
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 p-3 backdrop-blur md:hidden">
+        <Button asChild size="lg" className="w-full"><a href="#oferta">Quero o SAÚDE DOS PÉS <ArrowRight /></a></Button>
+      </div>
+      <div className="h-20 md:hidden" aria-hidden />
     </div>
   );
 }
@@ -93,7 +100,7 @@ function Hero() {
     <section className="offer-hero relative isolate overflow-hidden">
       <img src={heroImg} alt="Filha adulta e mãe consultando informações no celular em casa" width={1280} height={1024} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-[65%_center]" />
       <div className="offer-hero-shade absolute inset-0 -z-10" />
-      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-[1.3fr_0.7fr] md:py-24">
         <div className="max-w-xl">
         <p className="text-xs font-semibold uppercase tracking-widest text-highlight">E-book educativo + proposta de plataforma</p>
         <h1 className="mt-4 text-4xl font-extrabold text-primary-foreground md:text-5xl">SAÚDE DOS PÉS</h1>
@@ -105,62 +112,50 @@ function Hero() {
           <Button asChild size="lg" variant="secondary" className="h-auto whitespace-normal py-3.5"><a href="#oferta">Conhecer a oferta <ArrowRight /></a></Button>
           <Button asChild size="lg" variant="ghost" className="h-auto whitespace-normal border border-primary-foreground/40 py-3.5 text-primary-foreground"><a href="#ebook">Explorar o e-book</a></Button>
         </div>
-        <p className="mt-5 text-xs leading-relaxed text-primary-foreground/80">Oferta em preparação · Condições a confirmar<br />Conteúdo educativo. Não substitui avaliação profissional.</p>
+        <ul className="mt-6 grid gap-2 text-sm text-primary-foreground/90 sm:grid-cols-2">
+          {["E-book digital com 7 módulos", "Mapa Vivo para organizar observações", "Pensado para você e sua família", "Linguagem clara e responsável"].map((t) => <li key={t} className="flex gap-2"><Check className="size-4 shrink-0 text-highlight" />{t}</li>)}
+        </ul>
+        <p className="mt-5 text-xs leading-relaxed text-primary-foreground/75">Conteúdo educativo. Não substitui avaliação profissional.</p>
         </div>
+        <img src={coverImg} alt="Capa ilustrativa do e-book SAÚDE DOS PÉS" width={484} height={778} className="mx-auto hidden w-56 rotate-2 rounded-2xl shadow-soft md:block lg:w-64" />
       </div>
     </section>
   );
 }
 
-const SLIDES = [
-  { k: "Educação", t: "Cuidar começa por saber observar.", d: "Conteúdos claros sobre higiene, pele, unhas, calçados e sinais que merecem atenção profissional.", img: cuidadoImg },
-  { k: "Histórico", t: "Cada detalhe merece contexto.", d: "A proposta do Mapa Vivo é reunir datas, regiões e observações. A linha do tempo ao lado é ilustrativa.", img: null },
-  { k: "Família", t: "Mais organização para quem cuida de quem ama.", d: "Uma proposta de cuidado familiar com perfis separados e compartilhamento autorizado. Recursos ainda em preparação.", img: heroImg },
-];
-
-function Carrossel() {
-  const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setI((x) => (x + 1) % SLIDES.length), 7000);
-    return () => clearInterval(id);
-  }, [paused]);
-  const s = SLIDES[i] ?? SLIDES[0];
-  if (!s) return null;
+function Beneficios() {
+  const items = [
+    [BookOpen, "Aprenda", "Guia claro sobre pele, unhas, calçados e sinais de atenção."],
+    [Map, "Organize", "Observações por região do pé, com data e contexto."],
+    [HeartHandshake, "Cuide junto", "Apoio para quem acompanha pais, avós ou familiares."],
+    [ShieldCheck, "Com responsabilidade", "Educação, não diagnóstico. Profissional sempre em primeiro lugar."],
+  ] as const;
   return (
-    <section aria-roledescription="carrossel" aria-label="Destaques" className="bg-primary py-16 text-primary-foreground"
-      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)}
-      onKeyDown={(e) => { if (e.key === "ArrowRight") setI((i + 1) % 3); if (e.key === "ArrowLeft") setI((i + 2) % 3); }}>
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
-        <div key={i} className="animate-in fade-in slide-in-from-bottom-2 duration-500" aria-live="polite">
-          <p className="text-sm font-semibold uppercase tracking-widest text-highlight">{s.k}</p>
-          <h2 className="mt-3 text-3xl font-extrabold text-primary-foreground md:text-4xl">{s.t}</h2>
-          <p className="mt-4 text-lg opacity-85">{s.d}</p>
-          <div className="mt-8 flex items-center gap-3">
-            <Button variant="ghost" size="icon" aria-label="Slide anterior" onClick={() => setI((i + 2) % 3)} className="border border-primary-foreground/30"><ChevronLeft /></Button>
-            <Button variant="ghost" size="icon" aria-label="Próximo slide" onClick={() => setI((i + 1) % 3)} className="border border-primary-foreground/30"><ChevronRight /></Button>
-            <div className="ml-3 flex gap-2">
-              {SLIDES.map((sl, n) => (
-                <Button key={n} variant="ghost" size="icon" aria-label={`Ir para ${sl.k}`} aria-current={n === i} onClick={() => setI(n)} className="size-7"><span className={cn("h-2 w-2 rounded-full", n === i ? "bg-highlight" : "bg-primary-foreground/40")} /></Button>
-              ))}
-            </div>
+    <section className="border-b border-border bg-card">
+      <div className="mx-auto grid max-w-6xl gap-6 px-5 py-10 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(([Icon, t, d]) => (
+          <div key={t} className="flex gap-3">
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-secondary text-accent"><Icon className="size-5" /></span>
+            <div><h3 className="font-bold">{t}</h3><p className="mt-1 text-sm text-muted-foreground">{d}</p></div>
           </div>
-        </div>
-        <div className="overflow-hidden rounded-3xl">
-          {s.img ? (
-            <img src={s.img} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
-          ) : (
-            <div className="aspect-[4/3] space-y-3 bg-card p-6 text-card-foreground">
-              {[["20/10", "Dedos · pé esquerdo", "Bolha"], ["15/10", "Arco · pé direito", "Dor relatada"], ["03/10", "Calcanhar · pé esquerdo", "Rachadura"], ["28/09", "Unhas · pé direito", "Alteração na unha"]].map(([d, r, t]) => (
-                <div key={d} className="flex items-center gap-4 rounded-xl bg-secondary/60 p-4">
-                  <span className="font-display text-lg font-bold text-primary">{d}</span>
-                  <div><p className="font-semibold">{r}</p><p className="text-sm text-muted-foreground">{t}</p></div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ParaQuem() {
+  const p = [[p1, "Quem quer cuidar melhor de si"], [p2, "Filhos que cuidam dos pais"], [p3, "Pessoas que acompanham mudanças nos pés"], [p4, "Quem quer chegar mais organizado à consulta"]] as const;
+  return (
+    <section id="para-quem" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
+      <SectionHead kicker="Para quem é" title="Feito para quem quer cuidar com mais atenção." />
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {p.map(([img, t]) => (
+          <figure key={t} className="overflow-hidden rounded-2xl border border-border bg-card">
+            <img src={img} alt="" loading="lazy" className="aspect-square w-full object-cover" />
+            <figcaption className="p-4 font-display font-bold text-primary">{t}</figcaption>
+          </figure>
+        ))}
       </div>
     </section>
   );
@@ -213,24 +208,6 @@ function ComoFunciona() {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-function Familia() {
-  return (
-    <section id="familia" className="scroll-mt-24 bg-secondary/50 py-20">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2">
-        <img src={cuidadoImg} alt="Pessoa hidratando os pés em casa" loading="lazy" width={1024} height={768} className="rounded-[2rem] object-cover shadow-soft" />
-        <div>
-           <SectionHead kicker="Para a família" title="Quem cuida de si e de quem ama também precisa aprender a observar os pequenos detalhes." text="A proposta da plataforma respeita a autonomia da pessoa acompanhada. Os recursos familiares ainda não estão disponíveis." />
-          <ul className="space-y-4">
-            {["Históricos separados para não misturar informações.", "Compartilhamento somente com autorização.", "Organização de informações para as consultas.", "Respeito à privacidade e à autonomia de cada pessoa."].map((t) => (
-              <li key={t} className="flex gap-3"><span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />{t}</li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );

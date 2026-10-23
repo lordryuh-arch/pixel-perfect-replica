@@ -152,7 +152,15 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); color: var(--color-primary); letter-spacing: -0.02em; }
+  h1, h2, h3, h4 { font-family: var(--font-display); color: var(--color-primary); letter-spacing: 0; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+}
+
+.offer-hero { color: var(--primary-foreground); }
+.offer-hero-shade {
+  background: linear-gradient(90deg, color-mix(in oklab, var(--primary) 98%, transparent) 0%, color-mix(in oklab, var(--primary) 95%, transparent) 30%, color-mix(in oklab, var(--primary) 70%, transparent) 55%, color-mix(in oklab, var(--primary) 4%, transparent) 100%);
+}
+@media (max-width: 767px) {
+  .offer-hero-shade { background: color-mix(in oklab, var(--primary) 88%, transparent); }
 }

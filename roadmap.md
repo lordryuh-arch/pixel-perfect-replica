@@ -1,5 +1,5 @@
 # Commercial presentation
-- [ ] Create product mockups, book previews and audience imagery.
-- [ ] Add complete commercial sections and centralized unset offer configuration.
-- [ ] Preserve Mapa Vivo and add non-persistent interactive observation demonstration.
-- [ ] Check offer rules, navigation and mobile/tablet/desktop layouts.
+- [x] Create product mockups, book previews and audience imagery.
+- [x] Add complete commercial sections and centralized unset offer configuration.
+- [x] Preserve the existing Mapa Vivo demonstration without adding paid features.
+- [x] Check offer rules, navigation and mobile/tablet/desktop layouts.

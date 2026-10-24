@@ -17,7 +17,7 @@ export type Observacao = {
   tipo: string;
   data: string; // AAAA-MM-DD
   nota: string;
-  foto?: string; // URL de objeto em memória (createObjectURL)
+  foto?: string | undefined; // URL de objeto em memória (createObjectURL)
 };
 
 export type Habito = {

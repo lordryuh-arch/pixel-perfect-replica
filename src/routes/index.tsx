@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { MapaVivo } from "@/components/MapaVivo";
 import { EbookSection, ModulesSection, PlatformSection, OfferSection } from "@/components/OfferSections";
@@ -46,8 +46,11 @@ function Index() {
         <ComoFunciona />
         <PlatformSection />
         <section id="mapa-vivo" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20">
-          <SectionHead kicker="Mapa Vivo · Demonstração" title="Cada região do pé, com sua própria história." text="Um exemplo de como as observações podem ficar organizadas. Os dados são fictícios e a área de acompanhamento ainda não está disponível." />
+          <SectionHead kicker="Mapa Vivo · Demonstração" title="Cada região do pé, com sua própria história." text="Um exemplo de como as observações podem ficar organizadas. Os dados abaixo são fictícios; na área de acompanhamento local você registra as suas, nesta sessão, sem salvar nada." />
           <MapaVivo />
+          <div className="mt-8 text-center">
+            <Button asChild size="lg" className="h-auto whitespace-normal py-3.5"><Link to="/acompanhamento">Experimentar a área de acompanhamento local <ArrowRight /></Link></Button>
+          </div>
         </section>
         <OfferSection />
         <Faq />
@@ -81,6 +84,7 @@ function Header() {
         <Logo />
         <nav className="hidden gap-6 text-sm font-medium lg:flex" aria-label="Principal">
           {NAV.map(([l, h]) => <a key={h} href={h} className="hover:text-info">{l}</a>)}
+          <Link to="/acompanhamento" className="hover:text-info">Acompanhamento</Link>
         </nav>
         <Button asChild className="hidden lg:inline-flex"><a href="#oferta">Conhecer a oferta <ArrowRight /></a></Button>
         <Button variant="ghost" size="icon" className="lg:hidden" aria-expanded={open} aria-label={open ? "Fechar menu" : "Abrir menu"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
@@ -88,6 +92,7 @@ function Header() {
       {open && (
         <nav className="border-t border-border px-5 py-4 lg:hidden" aria-label="Menu móvel">
           {NAV.map(([l, h]) => <a key={h} href={h} onClick={() => setOpen(false)} className="block py-2 font-medium">{l}</a>)}
+          <Link to="/acompanhamento" onClick={() => setOpen(false)} className="block py-2 font-medium">Acompanhamento</Link>
           <Button asChild className="mt-3"><a href="#oferta" onClick={() => setOpen(false)}>Conhecer a oferta <ArrowRight /></a></Button>
         </nav>
       )}
@@ -220,7 +225,7 @@ const FAQ = [
   ["A plataforma analisa minhas fotos?", "Não há análise automática. A proposta é organizar fotografias para consulta pessoal e conversas com profissionais. O envio de fotos não está disponível nesta demonstração."],
   ["Posso acompanhar os pés de um familiar?", "Esse é um dos recursos propostos, ainda não disponível: perfis separados e compartilhamento autorizado. Os limites de perfis e as condições de acesso estão a confirmar."],
   ["Quando devo procurar atendimento?", "Diante de feridas, sinais de infecção, dor intensa, inchaço novo ou perda de sensibilidade, procure um profissional. Em situações graves, busque atendimento de urgência."],
-  ["A área de acompanhamento já está disponível?", "Ainda não. O Mapa Vivo desta página é uma demonstração com dados fictícios."],
+  ["A área de acompanhamento já está disponível?", "Existe uma demonstração local: você pode criar perfis, registrar observações e montar um resumo, tudo apenas nesta sessão — nada é salvo ou enviado, e os dados somem ao recarregar a página. A versão completa, com dados guardados, faz parte da proposta da plataforma."],
 ];
 
 function Faq() {

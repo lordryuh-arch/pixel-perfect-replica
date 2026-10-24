@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -124,8 +125,8 @@ export function MapaVivo() {
           ))}
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
-          <button disabled title="Disponível na área de acompanhamento" className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground opacity-60">Adicionar observação</button>
-          <button disabled title="Disponível na área de acompanhamento" className="rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary opacity-60">Ver histórico</button>
+          <Link to="/acompanhamento" className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">Adicionar observação</Link>
+          <Link to="/acompanhamento" className="rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary">Abrir área local</Link>
         </div>
         <p className="mt-3 text-xs text-muted-foreground">Demonstração com dados fictícios. Os registros não representam diagnóstico.</p>
       </div>

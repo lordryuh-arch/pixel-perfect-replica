@@ -225,7 +225,7 @@ const FAQ = [
   ["A plataforma analisa minhas fotos?", "Não há análise automática. A proposta é organizar fotografias para consulta pessoal e conversas com profissionais. O envio de fotos não está disponível nesta demonstração."],
   ["Posso acompanhar os pés de um familiar?", "Esse é um dos recursos propostos, ainda não disponível: perfis separados e compartilhamento autorizado. Os limites de perfis e as condições de acesso estão a confirmar."],
   ["Quando devo procurar atendimento?", "Diante de feridas, sinais de infecção, dor intensa, inchaço novo ou perda de sensibilidade, procure um profissional. Em situações graves, busque atendimento de urgência."],
-  ["A área de acompanhamento já está disponível?", "Ainda não. O Mapa Vivo desta página é uma demonstração com dados fictícios."],
+  ["A área de acompanhamento já está disponível?", "Existe uma demonstração local: você pode criar perfis, registrar observações e montar um resumo, tudo apenas nesta sessão — nada é salvo ou enviado, e os dados somem ao recarregar a página. A versão completa, com dados guardados, faz parte da proposta da plataforma."],
 ];
 
 function Faq() {

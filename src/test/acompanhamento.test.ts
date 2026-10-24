@@ -48,7 +48,7 @@ describe("Área de acompanhamento local", () => {
 
   it("a área local nunca usa armazenamento do navegador nem chama backend", () => {
     const fontes = ["src/routes/acompanhamento.tsx", "src/lib/acompanhamento.ts"].map((f) =>
-      readFileSync(resolve(__dirname, "..", f), "utf8"),
+      readFileSync(resolve(__dirname, "..", "..", f), "utf8"),
     );
     for (const fonte of fontes) {
       expect(fonte).not.toMatch(/localStorage|sessionStorage|indexedDB|document\.cookie/);
